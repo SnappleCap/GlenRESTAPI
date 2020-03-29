@@ -1,0 +1,26 @@
+﻿@model IEnumerable<UtilantMVC.Models.Photo>
+
+@{
+    ViewData["Title"] = "Album";
+}
+
+<h1>Album</h1>
+
+<div class="container-fluid">
+    <div class="row">
+        <h2>Album Photos:</h2>
+    </div>
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col-12 col-md-6 col-lg-3 text-center my-4 px-0">
+                <div class="card mx-2 h-100">
+                    <img src="@Html.DisplayFor(modelItem => item.url)" class="card-imh-top img-fluid" />
+                    <div class="card-body">
+                        <h5 class="mt-1 card-title">@Html.DisplayFor(modelItem => item.title)</h5>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

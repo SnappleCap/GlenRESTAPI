@@ -1,0 +1,40 @@
+﻿@model IEnumerable<UtilantMVC.Models.User>
+
+@{
+    ViewData["Title"] = "User";
+}
+
+<h1>User</h1>
+
+<div class="container-fluid">
+    <div class="row">
+        <h2>User Information:</h2>
+    </div>
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col-12 my-4">
+                <div class="jumbotron">
+                    <h1 class="display-4">@Html.DisplayFor(modelItem => item.name)</h1>
+                    <p class="lead"><strong>Username:</strong> @Html.DisplayFor(modelItem => item.username)</p>
+                    <hr class="my-4">
+                    <p class="lead"><strong>Email:</strong> @Html.DisplayFor(modelItem => item.email)</p>
+                    <p class="lead"><strong>Phone:</strong> @Html.DisplayFor(modelItem => item.phone)</p>
+                    <p class="lead">
+                        <strong>Address:</strong>
+                        @Html.DisplayFor(modelItem => item.address.street),
+                        @Html.DisplayFor(modelItem => item.address.suite),
+                        @Html.DisplayFor(modelItem => item.address.city),
+                        @Html.DisplayFor(modelItem => item.address.zipcode)
+                        (@Html.DisplayFor(modelItem => item.address.geo.lat), @Html.DisplayFor(modelItem => item.address.geo.lng))
+                    </p>
+                    <h4 class="mt-4">Company Information:</h4>
+                    <p class="lead"><strong>Name:</strong> @Html.DisplayFor(modelItem => item.company.name)</p>
+                    <p class="lead"><strong>Catchphrase:</strong> @Html.DisplayFor(modelItem => item.company.catchPhrase)</p>
+                    <p class="lead"><strong>BS:</strong> @Html.DisplayFor(modelItem => item.company.bs)</p>
+                    <a class="btn btn-primary mt-4" role="button" asp-action="Posts" asp-route-id="@item.id">View Posts</a>
+                </div>
+            </div>
+        }
+    </div>
+</div>

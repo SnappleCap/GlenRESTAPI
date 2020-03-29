@@ -1,0 +1,68 @@
+﻿@model IEnumerable<UtilantMVC.Models.Album>
+
+@{
+    ViewData["Title"] = "Home";
+}
+<div id="albumsList">
+
+    <form class="form-inline mb-4" autocomplete="off">
+        <div class="form-group mx-2">
+            <input id="title" class="form-control filter" type="text" placeholder="Search by album title..." />
+        </div>
+        <div class="form-group">
+            <input id="user" class="form-control filter" type="text" placeholder="Search by user's name..." />
+        </div>
+    </form>
+
+    <div class="container-fluid">
+        <div class="row list" id="albumList">
+            @foreach (var item in Model)
+            {
+                <div class="col-12 col-md-6 col-lg-3 my-4 px-0">
+                    <div class="card albumContainer mx-2 h-100">
+                        <img src="@Html.DisplayFor(modelItem => item.firstThumb)" class="card-img-top img-fluid" />
+                        <div class="card-body">
+                            <h5 class="mt-1 card-title"><a asp-action="Album" asp-route-id="@item.id" class="title" id="title">@Html.DisplayFor(modelItem => item.title)</a></h5>
+                            <h6 class="mt-2"><strong>User:</strong> <a asp-action="Person" asp-route-id="@item.userId" class="user" id="user">@Html.DisplayFor(modelItem => item.name)</a></h6>
+                            <h6 class="mt-1"><strong>User Email:</strong> @Html.DisplayFor(modelItem => item.email)</h6>
+                            <h6 class="mt-1"><strong>User Phone:</strong> @Html.DisplayFor(modelItem => item.phone)</h6>
+                            <h6 class="mt-1">
+                                <strong>User Address:</strong>
+                                @Html.DisplayFor(modelItem => item.address.street),
+                                @Html.DisplayFor(modelItem => item.address.suite),
+                                @Html.DisplayFor(modelItem => item.address.city),
+                                @Html.DisplayFor(modelItem => item.address.zipcode)
+                                (@Html.DisplayFor(modelItem => item.address.geo.lat), @Html.DisplayFor(modelItem => item.address.geo.lng))
+                            </h6>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+        <div class="row">
+            <ul class="pagination"></ul>
+        </div>
+    </div>
+
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
+<script>
+    var filterOptions = {
+        valueNames: ['title', 'user'],
+        page: 8,
+        pagination: true
+    };
+
+    var albumsList = new List('albumsList', filterOptions);
+
+    $(".filter").keyup(function () {
+        albumsList.filter(item => {
+            return filterOptions.valueNames.every(name => {
+                var value = $("#" + name).val().toLowerCase();
+                return item.values()[name].toLowerCase().includes(value)
+            });
+        });
+    })
+</script>
