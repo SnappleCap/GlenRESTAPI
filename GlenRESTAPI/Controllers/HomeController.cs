@@ -7,10 +7,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using UtilantMVC.Models;
+using GlenRESTAPI.Models;
 using Newtonsoft.Json;
 
-namespace UtilantMVC.Controllers
+namespace GlenRESTAPI.Controllers
 {
     public class HomeController : Controller
     {

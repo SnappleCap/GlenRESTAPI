@@ -1,6 +1,6 @@
 using System;
 
-namespace UtilantMVC.Models
+namespace GlenRESTAPI.Models
 {
     public class ErrorViewModel
     {

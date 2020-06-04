@@ -7,7 +7,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 
-namespace UtilantMVC.Models
+namespace GlenRESTAPI.Models
 {
     public class Photo
     {
